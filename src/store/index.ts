@@ -1,8 +1,10 @@
 import { combineReducers, configureStore, PreloadedState } from '@reduxjs/toolkit';
-import counterReducer from './slices/counterSlice';
+
+// import slice
+import sectionSlice from './slices/section-slice';
 
 export const combinedReducer = combineReducers({
-  counter: counterReducer,
+  section: sectionSlice
 });
 
 function setupStore(preloadedState?: PreloadedState<RootState>) {
@@ -12,11 +14,11 @@ function setupStore(preloadedState?: PreloadedState<RootState>) {
   });
 }
 
-export type AppStore = ReturnType<typeof setupStore>;
-export type RootState = ReturnType<typeof combinedReducer>;
-
 export const store = configureStore({
   reducer: combinedReducer,
 });
 
+export type AppStore = ReturnType<typeof setupStore>;
+export type RootState = ReturnType<typeof combinedReducer>;
 export type ReduxState = ReturnType<typeof store.getState>;
+export type AppDispatch = AppStore["dispatch"];
